@@ -2,35 +2,54 @@
 
 **Valora** is a full-stack Valorant-inspired web application that simulates a gaming ecosystem with authentication, store management, map exploration, and admin controls.
 
-Built using **Node.js, Express, MySQL, and EJS**, the project focuses on dynamic data rendering and real-world backend architecture.
+Built using **Node.js, Express, MySQL, and EJS**, the project focuses on dynamic data rendering, scalable architecture, and real-world backend integration.
+
+---
+
+## 📸 Screenshots
+
+### 🏠 Home Page
+![Home](screenshots/Homepage.png)
+
+### 🔐 Login Page
+![Login](screenshots/login_page.png)
+
+### 🛒 Store Page
+![Store](screenshots/store_page.png)
+
+### 🗺 Maps Page
+![Maps](screenshots/map_page.png)
+
+### 📊 Dashboard
+![Dashboard](screenshots/dashboard_page.png)
 
 ---
 
 ## 🚀 Features
 
 ### 🔐 Authentication System
-- User registration & login
-- Session-based authentication
-- Role-based access control (User / Admin)
+- User registration & login  
+- Session-based authentication  
+- Role-based access control (User / Admin)  
 
 ### 🛒 Store System
-- Dynamic item listing from MySQL
-- Purchase simulation flow
-- Order tracking system
+- Dynamic item listing from MySQL  
+- Purchase simulation flow  
+- Order tracking system  
 
 ### 🗺 Maps Module
-- Maps stored and fetched from database
-- Dynamic rendering using EJS templates
-- Easily scalable (add new maps via DB)
+- Maps stored and fetched from database  
+- Dynamic rendering using EJS templates  
+- Easily scalable (add new maps via DB)  
 
 ### 📊 Dashboard
-- Displays user profile details
-- Shows order history
-- Quick access to admin panel (if authorized)
+- Displays user profile details  
+- Shows order history  
+- Quick access to admin panel (if authorized)  
 
 ### 🛠 Admin Panel
-- Add, edit, and delete items (CRUD)
-- Full database-driven content management
+- Add, edit, and delete items (CRUD)  
+- Full database-driven content management  
 
 ---
 
@@ -43,12 +62,12 @@ Built using **Node.js, Express, MySQL, and EJS**, the project focuses on dynamic
 ### 🗄 Database
 - MySQL (Relational Database)  
 - Tables:
-  - users
-  - items
-  - orders
-  - order_items
-  - maps
-  - agents
+  - users  
+  - items  
+  - orders  
+  - order_items  
+  - maps  
+  - agents  
 
 ### 🎨 Frontend
 - EJS (Embedded JavaScript Templates)  
@@ -66,72 +85,75 @@ Built using **Node.js, Express, MySQL, and EJS**, the project focuses on dynamic
 
 ## 📂 Project Structure
 
-    valora/
-    │── public/          # Static assets (CSS, images, videos)
-    │── views/           # EJS templates
-    │── server.js        # Main application entry point
-    │── db.js            # Database configuration
-    │── package.json     # Dependencies and scripts
-    │── README.md        # Project documentation
+```
+valora/
+│── public/          # Static assets (CSS, images, videos)
+│── views/           # EJS templates
+│── server.js        # Main application entry point
+│── db.js            # Database configuration
+│── package.json     # Dependencies and scripts
+│── database.sql     # Full database schema
+│── screenshots/     # UI screenshots for preview
+│── README.md        # Project documentation
+```
 
 ---
 
 ## ⚙️ Setup Instructions
 
 ### 1️⃣ Clone the Repository
-    git clone https://github.com/arpit7799/ValoraX.git
-    cd ValoraX
+
+```bash
+git clone https://github.com/arpit7799/ValoraX.git
+cd ValoraX
+```
 
 ### 2️⃣ Install Dependencies
-    npm install
+
+```bash
+npm install
+```
 
 ### 3️⃣ Configure Environment Variables
 
 Create a `.env` file in the root directory:
 
-    DB_HOST=localhost
-    DB_USER=root
-    DB_PASSWORD=yourpassword
-    DB_NAME=valorant
+```env
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=yourpassword
+DB_NAME=valorant
+```
 
----
+### 4️⃣ Setup Database
 
-### 4️⃣ Setup MySQL Database
+```sql
+CREATE DATABASE valorant;
+```
 
-Run the following in MySQL:
+Then import:
 
-    CREATE DATABASE valorant;
-
-Example table (maps):
-
-    CREATE TABLE maps (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      name VARCHAR(100),
-      description TEXT,
-      image VARCHAR(500)
-    );
-
-Create similar tables for:
-- users  
-- items  
-- orders  
-- order_items  
-
----
+```
+database.sql
+```
 
 ### 5️⃣ Run the Application
 
-    npm start
+```bash
+npm start
+```
 
-For development (auto-restart):
+or
 
-    npx nodemon server.js
-
----
+```bash
+npx nodemon server.js
+```
 
 ### 6️⃣ Open in Browser
 
-    http://localhost:3000
+```
+http://localhost:3000
+```
 
 ---
 
