@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login • VALORANT</title>
+
+  <!-- SAME FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+
+  <!-- USE SAME CSS AS INDEX -->
+  <link rel="stylesheet" href="/css/index.css"/>
+
+  <style>
+
+    .auth-box {
+      background: rgba(31, 39, 49, 0.6);
+      backdrop-filter: blur(14px);
+      padding: 40px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 420px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      text-align: center;
+    }
+
+    .auth-box h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px;
+      letter-spacing: 3px;
+      color: #ff4655;
+      margin-bottom: 20px;
+    }
+
+    .auth-box input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 14px;
+      background: rgba(15,25,35,0.8);
+      border: 1px solid #2e3a47;
+      border-radius: 6px;
+      color: white;
+    }
+
+    .auth-box input:focus {
+      outline: none;
+      border-color: #ff4655;
+    }
+
+    .auth-box button {
+      width: 100%;
+      padding: 13px;
+      background: #ff4655;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .auth-box button:hover {
+      background: #e03c4c;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255,70,85,0.4);
+    }
+
+    .auth-link {
+      margin-top: 15px;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .auth-link a {
+      color: #ff4655;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .error-box {
+      background: rgba(255, 70, 85, 0.15);
+      border: 1px solid #ff4655;
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 16px;
+    }
+
+    .menu-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .playnow-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-section .search-icon {
+      width: 32px !important;
+      height: 32px !important;
+      object-fit: contain;
+      filter: brightness(1.1);
+    }
+
+    .menu-section .search-icon:hover {
+      transform: scale(1.1);
+      transition: 0.2s ease;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- SAME NAVBAR -->
+<header class="navbar">
+  <div class="logo-section">
+    <a href="/">
+      <img src="/images/RIOT_LOGO.png" class="riot-logo"/>
+    </a>
+    <a href="/">
+      <img src="/images/VALORANT_ICON.png" class="valo-icon"/>
+    </a>
+  </div>
+
+  <nav class="nav-menu">
+    <ul>
+
+      <li class="dropdown">
+        <a href="#" class="dropbtn">GAME INFO</a>
+        <ul class="dropdown-content">
+          <li><a href="/agents">Agents</a></li>
+          <li><a href="/maps">Maps</a></li>
+          <li><a href="#">Arsenal</a></li>
+          <li><a href="#">Premier</a></li>
+        </ul>
+      </li>
+
+      <li><a href="/store">STORE</a></li>
+
+      <% if (!currentUser) { %>
+        <li><a href="/login" style="color:#ff4655;">LOGIN</a></li>
+        <li><a href="/register">REGISTER</a></li>
+      <% } else { %>
+        <li><a href="/dashboard">DASHBOARD</a></li>
+        <li><a href="/logout">LOGOUT</a></li>
+      <% } %>
+
+    </ul>
+  </nav>
+
+  <div class="menu-section">
+    <a href="/" class="playnow-link">
+      <img src="/images/home_ICON.png" class="nav-icon search-icon"/>
+    </a>
+  </div>
+</header>
+
+<!-- 🔥 SAME HERO STRUCTURE AS INDEX -->
+<main class="hero-section">
+
+  <div class="hero-background">
+    <video class="hero-video" src="/videos/login_page_video.mp4" autoplay muted loop playsinline></video>
+    <div class="overlay"></div>
+  </div>
+
+  <!-- LOGIN CONTENT INSIDE HERO -->
+  <div class="hero-content">
+
+    <div class="auth-box">
+      <h1>LOGIN</h1>
+
+      <% if (error) { %>
+        <div class="error-box"><%= error %></div>
+      <% } %>
+
+      <form action="/login" method="POST">
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">LOGIN</button>
+      </form>
+
+      <p class="auth-link">
+        Don't have an account? <a href="/register">Register</a>
+      </p>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="riot-footer">
+  <div class="footer-social">
+    <a href="https://twitter.com/valorant" target="_blank" class="footer-icon"><img src="/images/X_LOGO.png" alt="X"></a>
+    <a href="https://www.youtube.com/@valorant" target="_blank" class="footer-icon"><img src="/images/YT_LOGO.png" alt="YouTube"></a>
+    <a href="https://instagram.com/valorant" target="_blank" class="footer-icon"><img src="/images/INSTAGRAM_LOGO.png" alt="Instagram"></a>
+    <a href="https://www.tiktok.com/@valorant" target="_blank" class="footer-icon"><img src="/images/TIK TOK_LOGO.png" alt="TikTok"></a>
+    <a href="https://www.facebook.com/playvalorant/" target="_blank" class="footer-icon"><img src="/images/FACEBOOK_LOGO.png" alt="Facebook"></a>
+    <a href="https://discord.gg/valorant" target="_blank" class="footer-icon"><img src="/images/DISCORD_LOGO.png" alt="Discord"></a>
+  </div>
+
+  <img src="/images/RIOT_GAMES_LOGO.png" alt="Riot Games Footer Logo" class="footer-riot-logo"/>
+
+  <div class="footer-copyright">
+    © 2020-2026 Riot Games, Inc. RIOT GAMES, VALORANT and any associated logos are trademarks of Riot Games, Inc.
+  </div>
+
+  <div class="footer-links">
+    <a href="https://www.riotgames.com/en/privacy-notice" class="footer-link">PRIVACY NOTICE</a>
+    <a href="https://www.riotgames.com/en/terms-of-service" class="footer-link">TERMS OF SERVICE</a>
+    <a href="#" class="footer-link">COOKIE PREFERENCES</a>
+  </div>
+
+  <div class="footer-esrb">
+    <img src="/images/U:A_LOGO.png" alt="ESRB Rating" class="footer-esrb-img"/>
+    <div class="footer-esrb-text">
+      Blood<br>
+      Language<br>
+      Violence<br>
+      Users Interact<br>
+      In-Game Purchases
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

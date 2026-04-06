@@ -1,0 +1,91 @@
+/* =============================
+   GENERAL STYLES
+============================= */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #0f111a;
+  color: #ffffff;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #1a1c2c;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+/* =============================
+   AGENTS GRID
+============================= */
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+/* =============================
+   AGENT CARD
+============================= */
+.agent-card {
+  background-color: #1f2133;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.agent-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.agent-card a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.agent-art img {
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid #333;
+}
+
+.agent-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0.5rem 0 0.2rem 0;
+}
+
+.agent-role {
+  font-size: 0.9rem;
+  color: #a0a0a0;
+  margin-bottom: 0.3rem;
+}
+
+.agent-ability {
+  font-size: 0.8rem;
+  color: #c0c0c0;
+  padding: 0 0.5rem 1rem 0.5rem;
+}
+
+/* =============================
+   RESPONSIVE DESIGN
+============================= */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .agent-card {
+    font-size: 0.9rem;
+  }
+}

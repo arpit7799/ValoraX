@@ -1,0 +1,336 @@
+/* ================== RESET ================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; max-width: 100%; }
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background: #111111;
+  color: #ffffff;
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+/* ================== NAVBAR (blended tiles) ================== */
+.navbar {
+  display: flex; align-items: center; justify-content: space-between;
+
+  background: #000000;
+  backdrop-filter: blur(10px);
+
+  padding: 0.8rem 2.5rem;
+  position: fixed; width: 100%; top: 0; z-index: 1000;
+
+  border-bottom: 1px solid rgb(0, 0, 0);
+  height: 64px;
+}
+
+/* ensure inner blocks don't overlay darker squares */
+.logo-section,
+.menu-section,
+.nav-menu,
+.nav-menu ul,
+.navbar > * { background: transparent; }
+
+/* nuke any tile backgrounds around icons/logos */
+.logo-section img,
+.menu-section img,
+.logo-section .tile,
+.menu-section .tile {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Branding */
+.logo-section { display: flex; align-items: center; gap: 14px; }
+.riot-logo { width: 70px; height: auto; filter: brightness(1.05); }
+.valo-icon { width: 40px; height: 50px; filter: brightness(1.05); }
+
+/* Center menu with dropdown support */
+.nav-menu ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  align-items: center;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+.nav-menu ul li {
+  position: relative;
+}
+.nav-menu ul li a, .nav-menu ul li .dropbtn {
+  color: #f2f2f2;
+  cursor: pointer;
+  padding: 6px 8px;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+.nav-menu ul li a:hover, .nav-menu ul li .dropbtn:hover {
+  color: #ff4655;
+}
+.nav-menu ul li .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%; left: 0;
+  background: #191919;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border-radius: 4px;
+  min-width: 160px;
+  z-index: 10000;
+  padding: 8px 0;
+}
+.nav-menu ul li .dropdown-content li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.nav-menu ul li .dropdown-content li a {
+  color: #f2f2f2;
+  display: block;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
+  text-transform: none;
+}
+.nav-menu ul li .dropdown-content li a:hover {
+  background: #ff4655;
+  color: #fff;
+}
+.nav-menu ul li:hover > .dropdown-content {
+  display: block;
+}
+
+/* Special social dropdown styling */
+.nav-menu ul li .dropdown-content.socials {
+  padding: 12px 18px;
+}
+.nav-menu ul li .dropdown-content.socials li {
+  font-weight: 700;
+  font-size: 0.90rem;
+  padding: 8px 14px;
+  cursor: default;
+  color: #ccc;
+  text-transform: none;
+  white-space: nowrap;
+}
+.nav-menu ul li .dropdown-content.socials li:not(:last-child) {
+  border-bottom: 1px solid #333;
+  margin-bottom: 8px;
+}
+
+/* Right icons */
+.menu-section {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+.nav-icon {
+  display: inline-block;
+  opacity: 1;
+  transition: transform 0.2s, opacity 0.2s, filter 0.2s;
+}
+.search-icon {
+  width: 150px;
+  height: 100px;
+  object-fit: contain;
+}
+.menu-section img.browser-icon, .menu-section img.hamburger-icon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+.menu-section img.hamburger-icon {
+  height: 40px;
+}
+.menu-section img.browser-icon.big {
+  width: 70px;
+  height: 65px;
+}
+.menu-section img.hamburger-icon.big {
+  width: 70px;
+  height: 55px;
+}
+.nav-icon:hover {
+  transform: scale(1.08);
+  opacity: 1;
+  filter: brightness(1.1);
+}
+
+/* Home icon (was Play Now image) */
+.home-link { display: inline-flex; align-items: center; justify-content: center; }
+.home-icon { width: 140px; height: 40px; object-fit: contain; display: block; }
+
+.search-icon { width: 24px; height: 24px; object-fit: contain; }
+.menu-section img.browser-icon, .menu-section img.hamburger-icon { width: 36px; height: 36px; object-fit: contain; }
+.menu-section img.hamburger-icon { height: 40px; }
+.menu-section img.browser-icon.big { width: 70px; height: 65px; }
+.menu-section img.hamburger-icon.big { width: 70px; height: 55px; }
+.nav-icon:hover { transform: scale(1.08); opacity: 1; filter: brightness(1.1); }
+
+/* ================== HERO (Download) ================== */
+.hero-section { position: relative; width: 100vw; min-height: 100vh; padding-top: 64px; overflow: hidden; }
+.hero-background { position: absolute; inset: 0; z-index: 1; }
+.dl-hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.overlay {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(0deg, rgba(17,17,17,0.85) 0%, rgba(17,17,17,0.55) 35%, rgba(17,17,17,0.25) 65%, rgba(17,17,17,0.1) 100%);
+}
+
+.hero-content { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; height: calc(100vh - 64px); padding: 0 24px; text-align: center; }
+.valorant-logo { width: clamp(220px, 22vw, 320px); height: auto; margin-bottom: 14px; filter: drop-shadow(0 8px 24px rgba(0,0,0,.5)); }
+.dl-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5.4vw, 64px); letter-spacing: 1px; margin-bottom: 8px; }
+.dl-copy  { max-width: 900px; color: #e6e6e6; font-size: 14px; line-height: 1.6; margin-bottom: 22px; }
+
+.dl-platforms { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.dl-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 160px; padding: 14px 18px; border-radius: 6px;
+  font-weight: 800; letter-spacing: 0.6px; text-decoration: none; color: #fff;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+.dl-btn:hover { transform: translateY(-1px); filter: brightness(1.05); box-shadow: 0 10px 26px rgba(0,0,0,0.3); }
+
+/* Brand colors */
+.dl-btn.pc   { background: #e23d34; }
+.dl-btn.xbox { background: #2ea44f; }
+.dl-btn.ps   { background: #0f69ff; }
+
+/* ================== DOWNLOAD CTA (optional strip) ================== */
+.download-cta {
+  background: #111111;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 36px 20px 40px;
+  display: flex; justify-content: center;
+}
+.download-cta-inner { width: min(1100px, 92vw); text-align: center; }
+.download-cta-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(22px, 3.2vw, 32px);
+  letter-spacing: 1px;
+  color: #EAEAEA;
+  margin-bottom: 18px;
+}
+.download-cta-button {
+  display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+  padding: 14px 22px; border-radius: 6px; background: #e23d34; color: #fff;
+  font-weight: 800; letter-spacing: 0.6px;
+  box-shadow: 0 10px 24px rgba(226,61,52,0.28);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.download-cta-button:hover { transform: translateY(-1px); background: #c92f28; box-shadow: 0 12px 28px rgba(226,61,52,0.36); }
+
+/* Footer area below main content */
+.riot-footer {
+  margin-top: 48px;
+  width: 100vw;
+  padding: 40px 0 80px;
+  background: #111111;
+  color: #EAEAEA;
+  text-align: center;
+  position: relative;
+  font-size: 13px;
+  z-index: 99;
+}
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.footer-icon {
+  display: inline-flex;
+  width: auto;               /* remove fixed width */
+  height: auto;              /* remove fixed height */
+  background: transparent;   /* remove background */
+  border-radius: 0;          /* remove rounding */
+  padding: 0;                /* remove padding */
+  transition: filter 0.18s ease;
+}
+
+.footer-icon img {
+  width: 78px; height: 78px; /* your desired icon size */
+  object-fit: contain;
+  display: block;
+}
+
+.footer-icon:hover {
+  filter: brightness(1.18);
+  background: transparent;   /* no background highlight on hover */
+}
+
+.footer-riot-logo {
+  margin: 24px auto 16px;
+  width: 120px; height: auto;
+  display: block;
+  filter: brightness(1.04);
+}
+.footer-copyright {
+  color: #bbb;
+  margin-bottom: 22px;
+  font-size: 13px;
+  font-weight: 400;
+}
+.footer-links {
+  margin: 0 auto 34px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  font-size: 15px;
+  flex-wrap: wrap;
+}
+.footer-link {
+  color: #f0f0f0;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.9px;
+  transition: color .16s;
+}
+.footer-link:hover { color: #ff4655; }
+
+.footer-esrb {
+  margin: 0 auto;
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+}
+.footer-esrb-img {
+  width: 96px;
+  height: auto;
+  display: block;
+}
+.footer-esrb-text {
+  text-align: left;
+  color: #fff; font-size: 14px; line-height: 1.4;
+  font-weight: 500;
+}
+
+
+/* Responsive tweaks */
+@media (max-width:600px) {
+  .riot-footer { padding: 28px 0 60px; }
+  .footer-social { gap: 20px; }
+  .footer-riot-logo { width: 90px; }
+  .footer-links { gap: 16px; font-size: 13px; }
+  .footer-esrb { flex-direction: column; gap: 10px; }
+  .footer-esrb-img { width: 68px;}
+}
+
+/* Responsive touch-ups */
+@media (max-width: 560px) {
+  .home-icon { width: 120px; height: 36px; }
+  .dl-btn { min-width: 130px; padding: 12px 14px; }
+  .dl-copy { font-size: 13px; }
+}

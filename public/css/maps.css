@@ -1,0 +1,120 @@
+/* 🔥 Background Video */
+#bg-video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+  object-fit: cover;
+  filter: brightness(0.25);
+}
+
+/* 🧭 Navigation Bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-bottom: 2px solid #ff4655;
+  padding: 15px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 0 15px rgba(255, 70, 85, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.nav-logo {
+  color: #ff4655;
+  font-size: 22px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px #ff4655;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  margin-left: 25px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: #ff4655;
+  text-shadow: 0 0 10px #ff4655;
+}
+
+/* 🧠 Page Body */
+body {
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 40px;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+h1 {
+  color: #ff4655;
+  margin-top: 60px;
+  margin-bottom: 30px;
+  text-shadow: 0 0 15px #ff4655;
+}
+
+/* 🗺️ Map Card */
+.gun-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid #ff4655;
+  border-radius: 15px;
+  padding: 20px;
+  width: 380px;
+  margin: 0 auto;
+  transition: transform 0.3s;
+  box-shadow: 0 0 25px rgba(255, 70, 85, 0.5);
+}
+
+.gun-card:hover {
+  transform: scale(1.05);
+}
+
+.gun-card img {
+  width: 100%;
+  height: 230px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+/* 🔘 Button */
+button {
+  background-color: #ff4655;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  margin-top: 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #ff6a7a;
+  transform: scale(1.05);
+}
+
+/* 🦶 Footer */
+footer {
+  margin-top: 40px;
+  color: #aaa;
+  font-size: 14px;
+}

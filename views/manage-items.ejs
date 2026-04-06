@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel • VALORANT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0f1923;
+      color: white;
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAVBAR ─────────────────────────────────── */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: #111;
+      border-bottom: 2px solid #ff4655;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar-left { display: flex; align-items: center; gap: 6px; }
+    .navbar-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 2px;
+      color: #ff4655;
+    }
+    .navbar-badge {
+      background: #ff4655;
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+    }
+    .navbar-right a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      margin-left: 20px;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+    .navbar-right a:hover { color: #ff4655; }
+    .navbar-right a.active { color: #ff4655; }
+
+    /* ── CONTAINER ──────────────────────────────── */
+    .container {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 30px;
+      width: 100%;
+    }
+
+    /* ── PAGE HEADER ────────────────────────────── */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      letter-spacing: 3px;
+      color: #ff4655;
+      line-height: 1;
+    }
+    .page-subtitle {
+      color: #aaa;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    /* ── STATS BAR ──────────────────────────────── */
+    .stats-bar {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .stat-card {
+      background: #1f2731;
+      border: 1px solid #2e3a47;
+      border-radius: 10px;
+      padding: 18px 28px;
+      flex: 1;
+      min-width: 150px;
+      text-align: center;
+    }
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 38px;
+      color: #ff4655;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: #888;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── FLASH BANNER ───────────────────────────── */
+    .flash {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid #22c55e;
+      border-radius: 8px;
+      padding: 12px 20px;
+      margin-bottom: 24px;
+      color: #22c55e;
+      font-weight: bold;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ── SECTION TITLE ──────────────────────────── */
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 2px;
+      color: white;
+      margin-bottom: 16px;
+      border-left: 4px solid #ff4655;
+      padding-left: 12px;
+    }
+
+    /* ── ADD SKIN FORM ──────────────────────────── */
+    .form-panel {
+      background: #1f2731;
+      border: 1px solid #2e3a47;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 40px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #888;
+    }
+    .form-group input {
+      padding: 10px 14px;
+      background: #0f1923;
+      border: 1px solid #2e3a47;
+      border-radius: 6px;
+      color: white;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: #ff4655;
+    }
+    .form-group select {
+      padding: 10px 14px;
+      background: #0f1923;
+      border: 1px solid #2e3a47;
+      border-radius: 6px;
+      color: white;
+      font-size: 14px;
+    }
+    .form-group select:focus {
+      outline: none;
+      border-color: #ff4655;
+    }
+
+    /* PREVIEW AREA */
+    .preview-area {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .preview-box {
+      background: #0f1923;
+      border: 1px dashed #2e3a47;
+      border-radius: 8px;
+      width: 200px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .preview-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .preview-box video {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .preview-placeholder {
+      color: #444;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .btn-add {
+      background: #ff4655;
+      border: none;
+      padding: 12px 32px;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 15px;
+      letter-spacing: 1px;
+      transition: background 0.2s;
+    }
+    .btn-add:hover { background: #e03c4c; }
+
+    /* ── SKIN GRID ──────────────────────────────── */
+    .skin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .skin-card {
+      background: #1f2731;
+      border: 1px solid #2e3a47;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .skin-card:hover {
+      transform: translateY(-4px);
+      border-color: #ff4655;
+    }
+
+    .skin-card-img {
+      width: 100%;
+      height: 130px;
+      object-fit: contain;
+      background: #0f1923;
+      padding: 10px;
+    }
+
+    .skin-card-body { padding: 16px; }
+
+    .skin-card-name {
+      font-weight: bold;
+      font-size: 15px;
+      color: white;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .skin-card-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+    .badge-weapon  { background: #1a2940; color: #7eb3e0; border: 1px solid #2e4a6a; }
+    .badge-tier    { background: #2a1a1f; color: #ff8a95; border: 1px solid #5a2a30; }
+    .badge-price   { background: #1a2a1a; color: #7ecf7e; border: 1px solid #2a5a2a; }
+
+    .skin-card-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-edit {
+      flex: 1;
+      padding: 9px;
+      background: #1a3a6a;
+      border: 1px solid #2a5aaa;
+      border-radius: 6px;
+      color: #7eb3e0;
+      font-weight: bold;
+      font-size: 13px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-edit:hover { background: #1e4a8a; color: white; }
+
+    .btn-delete {
+      flex: 1;
+      padding: 9px;
+      background: #2a1a1f;
+      border: 1px solid #5a2a30;
+      border-radius: 6px;
+      color: #ff8a95;
+      font-weight: bold;
+      font-size: 13px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-delete:hover { background: #3a1a20; color: #ff4655; }
+
+    /* ── EMPTY STATE ────────────────────────────── */
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: #555;
+      grid-column: 1 / -1;
+    }
+    .empty-state-icon { font-size: 60px; margin-bottom: 16px; }
+    .empty-state p { font-size: 18px; }
+
+    /* ── DELETE CONFIRM MODAL ───────────────────── */
+    .confirm-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+    .confirm-overlay.active { display: flex; }
+    .confirm-box {
+      background: #1f2731;
+      border: 1px solid #ff4655;
+      border-radius: 12px;
+      padding: 36px 40px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+    .confirm-box h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      color: #ff4655;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+    .confirm-box p {
+      color: #aaa;
+      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .confirm-box strong { color: white; }
+    .confirm-actions { display: flex; gap: 12px; }
+    .btn-confirm-delete {
+      flex: 1;
+      padding: 12px;
+      background: #ff4655;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-confirm-delete:hover { background: #e03c4c; }
+    .btn-cancel-delete {
+      flex: 1;
+      padding: 12px;
+      background: transparent;
+      border: 1px solid #2e3a47;
+      border-radius: 6px;
+      color: #aaa;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn-cancel-delete:hover { border-color: #ff4655; color: white; }
+
+    /* ── FOOTER ─────────────────────────────────── */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      text-align: center;
+      background: #111;
+      border-top: 1px solid #2e3a47;
+      color: #555;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- NAVBAR                                       -->
+  <!-- ============================================ -->
+  <div class="navbar">
+    <div class="navbar-left">
+      <span class="navbar-brand">VALORANT</span>
+      <span class="navbar-badge">ADMIN</span>
+    </div>
+    <div class="navbar-right">
+      <a href="/">HOME</a>
+      <a href="/store">STORE</a>
+      <a href="/agents">AGENTS</a>
+      <a href="/manage-items" class="active">ADMIN PANEL</a>
+      <a href="/dashboard">DASHBOARD</a>
+      <a href="/logout" style="color:#ff4655;">LOGOUT (<%= currentUser.username %>)</a>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- MAIN CONTAINER                               -->
+  <!-- ============================================ -->
+  <div class="container">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <div>
+        <div class="page-title">ADMIN PANEL</div>
+        <div class="page-subtitle">Manage all weapon skins — changes reflect instantly in the Store</div>
+      </div>
+    </div>
+
+    <!-- FLASH MESSAGE (shown via URL param ?added=1 etc) -->
+    <% if (typeof flash !== 'undefined' && flash) { %>
+      <div class="flash">✅ &nbsp;<%= flash %></div>
+    <% } %>
+
+    <!-- STATS BAR -->
+    <%
+      const totalSkins     = items.length;
+      const tierCounts     = {};
+      items.forEach(s => { tierCounts[s.tier] = (tierCounts[s.tier] || 0) + 1; });
+      const premiumCount   = tierCounts['Premium']   || 0;
+      const exclusiveCount = tierCounts['Exclusive'] || 0;
+      const ultraCount     = tierCounts['Ultra']     || 0;
+    %>
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-number"><%= totalSkins %></div>
+        <div class="stat-label">Total Skins</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><%= premiumCount %></div>
+        <div class="stat-label">Premium</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><%= exclusiveCount %></div>
+        <div class="stat-label">Exclusive</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number"><%= ultraCount %></div>
+        <div class="stat-label">Ultra</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- ADD SKIN FORM                              -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section-title">ADD NEW SKIN</div>
+
+    <div class="form-panel">
+      <form action="/manage-items/add" method="POST" id="addForm">
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Skin Name *</label>
+            <input type="text" name="name" placeholder="e.g. Prime Vandal" required/>
+          </div>
+
+          <div class="form-group">
+            <label>Weapon Type *</label>
+            <select name="weapon_type" required>
+              <option value="">Select weapon</option>
+              <option>Classic</option><option>Shorty</option>
+              <option>Frenzy</option><option>Ghost</option>
+              <option>Sheriff</option><option>Stinger</option>
+              <option>Spectre</option><option>Bucky</option>
+              <option>Judge</option><option>Bulldog</option>
+              <option>Guardian</option><option>Phantom</option>
+              <option>Vandal</option><option>Marshal</option>
+              <option>Outlaw</option><option>Operator</option>
+              <option>Ares</option><option>Odin</option>
+              <option>Melee</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Tier *</label>
+            <select name="tier" required>
+              <option value="">Select tier</option>
+              <option>Select</option>
+              <option>Deluxe</option>
+              <option>Premium</option>
+              <option>Exclusive</option>
+              <option>Ultra</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Price (VP) *</label>
+            <input type="number" name="price" placeholder="e.g. 1775" min="0" required/>
+          </div>
+
+          <div class="form-group" style="grid-column: span 2;">
+            <label>Image URL *</label>
+            <input type="text" name="image" id="addImageUrl"
+                   placeholder="https://..." required
+                   oninput="previewAddImage(this.value)"/>
+          </div>
+
+          <div class="form-group" style="grid-column: span 2;">
+            <label>Video URL (optional)</label>
+            <input type="text" name="video" id="addVideoUrl"
+                   placeholder="https://...mp4"
+                   oninput="previewAddVideo(this.value)"/>
+          </div>
+
+        </div>
+
+        <!-- LIVE PREVIEW -->
+        <div class="preview-area">
+          <div class="preview-box" id="addImgPreviewBox">
+            <span class="preview-placeholder">Image preview</span>
+          </div>
+          <div class="preview-box" id="addVidPreviewBox">
+            <span class="preview-placeholder">Video preview</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-add">+ ADD SKIN</button>
+      </form>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- SKIN GRID                                  -->
+    <!-- ══════════════════════════════════════════ -->
+    <div class="section-title">
+      ALL SKINS
+      <span style="font-size:14px;color:#888;font-family:'Roboto',sans-serif;font-weight:normal;margin-left:10px;">
+        (<%= items.length %> total)
+      </span>
+    </div>
+
+    <div class="skin-grid">
+
+      <% if (items.length === 0) { %>
+        <div class="empty-state">
+          <div class="empty-state-icon">🎮</div>
+          <p>No skins yet. Add your first skin above.</p>
+        </div>
+      <% } %>
+
+      <% items.forEach(item => { %>
+        <div class="skin-card">
+
+          <img src="<%= item.image %>"
+               alt="<%= item.name %>"
+               class="skin-card-img"
+               onerror="this.src='/images/VALORANT_ICON.png'"/>
+
+          <div class="skin-card-body">
+            <div class="skin-card-name" title="<%= item.name %>">
+              <%= item.name %>
+            </div>
+
+            <div class="skin-card-meta">
+              <span class="badge badge-weapon"><%= item.weapon_type %></span>
+              <span class="badge badge-tier"><%= item.tier %></span>
+              <span class="badge badge-price"><%= item.price.toLocaleString() %> VP</span>
+            </div>
+
+          <div class="skin-card-actions"
+          data-id="<%= item.id %>"
+          data-name="<%= item.name %>">
+          <a href="/manage-items/edit/<%= item.id %>" class="btn-edit">✏ EDIT</a>
+          <button class="btn-delete" onclick="confirmDelete(this)">
+            🗑 DELETE
+          </button>
+        </div>
+          </div>
+
+        </div>
+      <% }) %>
+
+    </div>
+
+  </div><!-- /container -->
+
+  <!-- ============================================ -->
+  <!-- DELETE CONFIRM MODAL                         -->
+  <!-- ============================================ -->
+  <div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-box">
+      <h3>DELETE SKIN?</h3>
+      <p>You are about to delete <strong id="confirmSkinName"></strong>.<br>
+         This action cannot be undone and will remove it from the Store immediately.</p>
+      <div class="confirm-actions">
+        <a id="confirmDeleteBtn" href="#" class="btn-confirm-delete">YES, DELETE</a>
+        <button class="btn-cancel-delete" onclick="closeConfirm()">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    VALORANT Admin Panel &nbsp;•&nbsp; Built with Node.js + MySQL
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT                                   -->
+  <!-- ============================================ -->
+  <script>
+
+    // ── LIVE IMAGE PREVIEW (add form) ─────────────
+    function previewAddImage(url) {
+      const box = document.getElementById('addImgPreviewBox');
+      if (!url) {
+        box.innerHTML = '<span class="preview-placeholder">Image preview</span>';
+        return;
+      }
+      box.innerHTML = `<img src="${url}" onerror="this.parentElement.innerHTML='<span class=\\'preview-placeholder\\'>Invalid URL</span>'" alt="preview"/>`;
+    }
+
+    // ── LIVE VIDEO PREVIEW (add form) ─────────────
+    function previewAddVideo(url) {
+      const box = document.getElementById('addVidPreviewBox');
+      if (!url) {
+        box.innerHTML = '<span class="preview-placeholder">Video preview</span>';
+        return;
+      }
+      box.innerHTML = `<video src="${url}" muted autoplay loop style="max-width:100%;max-height:100%;"></video>`;
+    }
+
+    // ── DELETE CONFIRM MODAL ──────────────────────
+    function confirmDelete(btn) {
+    const card = btn.closest('.skin-card-actions');
+    const id   = card.dataset.id;
+    const name = card.dataset.name;
+    document.getElementById('confirmSkinName').innerText = name;
+    document.getElementById('confirmDeleteBtn').href = `/manage-items/delete/${id}`;
+    document.getElementById('confirmOverlay').classList.add('active');
+  }
+
+    function closeConfirm() {
+      document.getElementById('confirmOverlay').classList.remove('active');
+    }
+
+    // Close confirm modal on backdrop click
+    document.getElementById('confirmOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeConfirm();
+    });
+
+    // ── RESET FORM AFTER SUBMIT ───────────────────
+    document.getElementById('addForm').addEventListener('submit', function() {
+      // Small delay to let the browser submit, then reset previews
+      setTimeout(() => {
+        document.getElementById('addImgPreviewBox').innerHTML =
+          '<span class="preview-placeholder">Image preview</span>';
+        document.getElementById('addVidPreviewBox').innerHTML =
+          '<span class="preview-placeholder">Video preview</span>';
+      }, 100);
+    });
+
+  </script>
+
+</body>
+</html>

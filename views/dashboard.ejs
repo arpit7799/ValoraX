@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard • VALORANT</title>
+
+  <!-- SAME FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+
+  <!-- SAME CSS -->
+  <link rel="stylesheet" href="/css/index.css"/>
+
+  <style>
+    /* DASHBOARD GLASS STYLE */
+    .dashboard-box {
+      background: rgba(31, 39, 49, 0.6);
+      backdrop-filter: blur(14px);
+      padding: 40px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 900px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    }
+
+    .dashboard-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      letter-spacing: 3px;
+      color: #ff4655;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .dashboard-card {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+      justify-content: center;
+    }
+
+    .dashboard-card p {
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    .dashboard-card strong {
+      color: #ff4655;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      margin-bottom: 16px;
+      border-left: 4px solid #ff4655;
+      padding-left: 12px;
+    }
+
+    /* TABLE */
+    .order-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(20,25,35,0.6);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .order-table th {
+      background: #ff4655;
+      padding: 12px;
+      font-size: 13px;
+    }
+
+    .order-table td {
+      padding: 12px;
+      border-bottom: 1px solid #2e3a47;
+      color: #ccc;
+    }
+
+    .order-table tr:hover td {
+      background: rgba(255,70,85,0.1);
+      color: white;
+    }
+
+    .empty-orders {
+      text-align: center;
+      padding: 40px;
+      color: #aaa;
+    }
+
+    .empty-orders a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #ff4655;
+      border-radius: 6px;
+      color: white;
+      text-decoration: none;
+    }
+
+    /* ADMIN */
+    .admin-banner {
+      background: rgba(255,70,85,0.15);
+      border: 1px solid #ff4655;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-banner a {
+      background: #ff4655;
+      padding: 8px 16px;
+      border-radius: 6px;
+      color: white;
+      text-decoration: none;
+    }
+
+    /* FIX HOME ICON */
+    .menu-section .search-icon {
+      width: 32px !important;
+      height: 32px !important;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- SAME NAVBAR -->
+<header class="navbar">
+  <div class="logo-section">
+    <a href="/"><img src="/images/RIOT_LOGO.png" class="riot-logo"/></a>
+    <a href="/"><img src="/images/VALORANT_ICON.png" class="valo-icon"/></a>
+  </div>
+
+  <nav class="nav-menu">
+    <ul>
+      <li><a href="/">HOME</a></li>
+      <li><a href="/agents">AGENTS</a></li>
+      <li><a href="/store">STORE</a></li>
+
+      <li><a href="/dashboard" style="color:#ff4655;">DASHBOARD</a></li>
+      <li><a href="/logout">LOGOUT</a></li>
+    </ul>
+  </nav>
+
+  <div class="menu-section">
+    <a href="/">
+      <img src="/images/home_ICON.png" class="nav-icon search-icon"/>
+    </a>
+  </div>
+</header>
+
+<!-- SAME HERO STRUCTURE -->
+<main class="hero-section">
+
+  <div class="hero-background">
+    <!-- SAME VIDEO AS REGISTER -->
+    <video class="hero-video" src="/videos/register_page_video.mp4" autoplay muted loop playsinline></video>
+    <div class="overlay"></div>
+  </div>
+
+  <div class="hero-content">
+
+    <div class="dashboard-box">
+
+      <div class="dashboard-title">
+        WELCOME, <%= currentUser.username.toUpperCase() %>
+      </div>
+
+      <% if (currentUser.role === 'admin') { %>
+        <div class="admin-banner">
+          <span>⚡ Admin Access</span>
+          <a href="/manage-items">Admin Panel</a>
+        </div>
+      <% } %>
+
+      <div class="dashboard-card">
+        <p>User ID: <strong>#<%= currentUser.id %></strong></p>
+        <p>Role: <strong><%= currentUser.role %></strong></p>
+        <p>Username: <strong><%= currentUser.username %></strong></p>
+      </div>
+
+      <div class="section-title">ORDER HISTORY</div>
+
+      <% if (orders.length === 0) { %>
+        <div class="empty-orders">
+          <p>No purchases yet</p>
+          <a href="/store">Go to Store</a>
+        </div>
+      <% } else { %>
+        <table class="order-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% orders.forEach(order => { %>
+              <tr>
+                <td>#<%= order.id %></td>
+                <td><%= order.item_count %></td>
+                <td><%= order.total_amount %> VP</td>
+                <td><%= new Date(order.created_at).toLocaleDateString() %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } %>
+
+    </div>
+
+  </div>
+
+</main>
+
+<!-- SAME FOOTER -->
+<footer class="riot-footer">
+  <div class="footer-social">
+    <a href="#"><img src="/images/X_LOGO.png"></a>
+    <a href="#"><img src="/images/YT_LOGO.png"></a>
+    <a href="#"><img src="/images/INSTAGRAM_LOGO.png"></a>
+    <a href="#"><img src="/images/TIK TOK_LOGO.png"></a>
+  </div>
+
+  <img src="/images/RIOT_GAMES_LOGO.png" class="footer-riot-logo"/>
+
+  <div class="footer-links">
+    <a href="#">PRIVACY NOTICE</a>
+    <a href="#">TERMS OF SERVICE</a>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Skin • VALORANT Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0f1923;
+      color: white;
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: #111;
+      border-bottom: 2px solid #ff4655;
+    }
+    .navbar-left { display: flex; align-items: center; gap: 6px; }
+    .navbar-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 2px;
+      color: #ff4655;
+    }
+    .navbar-badge {
+      background: #ff4655;
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+    .navbar-right a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      margin-left: 20px;
+      font-size: 13px;
+    }
+    .navbar-right a:hover { color: #ff4655; }
+
+    .container {
+      flex: 1;
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      letter-spacing: 3px;
+      color: #ff4655;
+      margin-bottom: 8px;
+    }
+
+    .edit-subtitle {
+      color: #888;
+      font-size: 13px;
+      margin-bottom: 28px;
+    }
+
+    .form-panel {
+      background: #1f2731;
+      border: 1px solid #2e3a47;
+      border-radius: 12px;
+      padding: 32px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    label {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #888;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 11px 14px;
+      background: #0f1923;
+      border: 1px solid #2e3a47;
+      border-radius: 6px;
+      color: white;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #ff4655;
+    }
+
+    /* PREVIEW AREA */
+    .preview-area {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .preview-box {
+      background: #0f1923;
+      border: 1px dashed #2e3a47;
+      border-radius: 8px;
+      width: 220px;
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .preview-box img, .preview-box video {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .preview-label {
+      font-size: 11px;
+      color: #555;
+      text-align: center;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .preview-wrap { display: flex; flex-direction: column; }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn-update {
+      flex: 1;
+      padding: 13px;
+      background: #ff4655;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      letter-spacing: 1px;
+    }
+    .btn-update:hover { background: #e03c4c; }
+
+    .btn-cancel {
+      flex: 1;
+      padding: 13px;
+      background: transparent;
+      border: 1px solid #2e3a47;
+      border-radius: 6px;
+      color: #aaa;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-cancel:hover { border-color: #ff4655; color: #ff4655; }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      text-align: center;
+      background: #111;
+      border-top: 1px solid #2e3a47;
+      color: #555;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="navbar-left">
+      <span class="navbar-brand">VALORANT</span>
+      <span class="navbar-badge">ADMIN</span>
+    </div>
+    <div class="navbar-right">
+      <a href="/manage-items">← BACK TO PANEL</a>
+      <a href="/store">STORE</a>
+      <a href="/logout" style="color:#ff4655;">LOGOUT</a>
+    </div>
+  </div>
+
+  <!-- EDIT FORM -->
+  <div class="container">
+    <h1>EDIT SKIN</h1>
+    <div class="edit-subtitle">
+      Editing: <strong style="color:white;"><%= item.name %></strong>
+      &nbsp;•&nbsp; ID #<%= item.id %>
+    </div>
+
+    <div class="form-panel">
+      <!-- ✅ FIXED action — was /api/manage-items/update/_id -->
+      <form action="/manage-items/update/<%= item.id %>" method="POST">
+
+        <div class="form-group">
+          <label>Skin Name *</label>
+          <input type="text" name="name" value="<%= item.name %>" required/>
+        </div>
+
+        <div class="form-group">
+          <label>Weapon Type</label>
+          <select name="weapon_type">
+            <% ['Classic','Shorty','Frenzy','Ghost','Sheriff','Stinger','Spectre',
+                'Bucky','Judge','Bulldog','Guardian','Phantom','Vandal','Marshal',
+                'Outlaw','Operator','Ares','Odin','Melee'].forEach(w => { %>
+              <option value="<%= w %>" <%= item.weapon_type === w ? 'selected' : '' %>>
+                <%= w %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Tier</label>
+          <select name="tier">
+            <% ['Select','Deluxe','Premium','Exclusive','Ultra'].forEach(t => { %>
+              <option value="<%= t %>" <%= item.tier === t ? 'selected' : '' %>>
+                <%= t %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Price (VP) *</label>
+          <input type="number" name="price" value="<%= item.price %>" min="0" required/>
+        </div>
+
+        <div class="form-group">
+          <label>Image URL *</label>
+          <input type="text" name="image" id="editImageUrl"
+                 value="<%= item.image %>" required
+                 oninput="previewImage(this.value)"/>
+        </div>
+
+        <div class="form-group">
+          <label>Video URL (optional)</label>
+          <input type="text" name="video" id="editVideoUrl"
+                 value="<%= item.video || '' %>"
+                 oninput="previewVideo(this.value)"/>
+        </div>
+
+        <!-- LIVE PREVIEW -->
+        <div class="preview-area">
+          <div class="preview-wrap">
+            <div class="preview-label">Image Preview</div>
+            <div class="preview-box" id="imgPreviewBox">
+              <% if (item.image) { %>
+                <img src="<%= item.image %>" alt="preview"/>
+              <% } else { %>
+                <span style="color:#444;font-size:12px;">No image</span>
+              <% } %>
+            </div>
+          </div>
+          <div class="preview-wrap">
+            <div class="preview-label">Video Preview</div>
+            <div class="preview-box" id="vidPreviewBox">
+              <% if (item.video) { %>
+                <video src="<%= item.video %>" muted autoplay loop></video>
+              <% } else { %>
+                <span style="color:#444;font-size:12px;">No video</span>
+              <% } %>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" class="btn-update">✅ UPDATE SKIN</button>
+          <a href="/manage-items" class="btn-cancel">CANCEL</a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    VALORANT Admin Panel &nbsp;•&nbsp; Built with Node.js + MySQL
+  </footer>
+
+  <script>
+    function previewImage(url) {
+      const box = document.getElementById('imgPreviewBox');
+      if (!url) {
+        box.innerHTML = '<span style="color:#444;font-size:12px;">No image</span>';
+        return;
+      }
+      box.innerHTML = `<img src="${url}"
+        onerror="this.parentElement.innerHTML='<span style=\\'color:#444;font-size:12px;\\'>Invalid URL</span>'"
+        alt="preview" style="max-width:100%;max-height:100%;object-fit:contain;"/>`;
+    }
+
+    function previewVideo(url) {
+      const box = document.getElementById('vidPreviewBox');
+      if (!url) {
+        box.innerHTML = '<span style="color:#444;font-size:12px;">No video</span>';
+        return;
+      }
+      box.innerHTML = `<video src="${url}" muted autoplay loop
+        style="max-width:100%;max-height:100%;"></video>`;
+    }
+  </script>
+
+</body>
+</html>

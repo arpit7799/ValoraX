@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Valorant Landing Page</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="/css/index.css"/>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="logo-section">
+    <a href="/">
+      <img src="/images/RIOT_LOGO.png" class="riot-logo"/>
+    </a>
+    <a href="/">
+      <img src="/images/VALORANT_ICON.png" class="valo-icon"/>
+    </a>
+  </div>
+
+  <nav class="nav-menu">
+    <ul>
+
+      <li class="dropdown">
+        <a href="#" class="dropbtn">GAME INFO</a>
+        <ul class="dropdown-content">
+          <li><a href="/agents">Agents</a></li>
+          <li><a href="/maps">Maps</a></li>
+          <li><a href="#">Arsenal</a></li>
+          <li><a href="#">Premier</a></li>
+        </ul>
+      </li>
+
+      <li><a href="https://playvalorant.com/en-us/media">MEDIA</a></li>
+      <li><a href="https://playvalorant.com/en-us/news/">NEWS</a></li>
+      <li><a href="/store">STORE</a></li>
+
+      <!-- AUTH -->
+      <% if (!currentUser) { %>
+        <li><a href="/login">LOGIN</a></li>
+        <li><a href="/register">REGISTER</a></li>
+      <% } else { %>
+        <li><a href="/dashboard">DASHBOARD</a></li>
+        <li><a href="/logout">LOGOUT</a></li>
+      <% } %>
+
+    </ul>
+  </nav>
+
+  <div class="menu-section">
+    <a href="/" class="playnow-link">
+      <img src="/images/home_ICON.png" class="nav-icon search-icon"/>
+    </a>
+    <img src="/images/BROWSER_LOGO.png" class="nav-icon browser-icon big"/>
+    <img src="/images/HAMBURGER_ICON.png" class="nav-icon hamburger-icon big"/>
+  </div>
+</header>
+
+<!-- HERO -->
+<main class="hero-section">
+  <div class="hero-background">
+    <video class="hero-video" src="/videos/BACKGROUND HOMEPAGE.mp4" autoplay muted loop></video>
+    <div class="overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <img src="/images/VALORANT_LOGO.svg" class="valorant-logo"/>
+
+    <p class="subtitle">
+      VALORANT — A 5V5 TACTICAL SHOOTER FEATURING AGENTS WITH UNIQUE ABILITIES
+    </p>
+
+    <% if (!currentUser) { %>
+      <a href="/register" class="play-btn">PLAY FOR FREE</a>
+    <% } else { %>
+      <a href="/store" class="play-btn">ENTER STORE</a>
+    <% } %>
+  </div>
+</main>
+
+<!-- LATEST -->
+<section class="latest">
+  <div class="latest-header"><h2>THE LATEST</h2></div>
+
+  <div class="latest-scroller">
+
+    <article class="latest-card">
+      <img src="/images/LATEST_1.png" class="latest-img"/>
+      <div class="latest-meta"><span class="tag">GAME UPDATES</span></div>
+      <h3 class="latest-title">Behavior Update: AFKs & Dodges</h3>
+      <p class="latest-desc">Addressing players abusing AFK systems.</p>
+    </article>
+
+    <article class="latest-card">
+      <img src="/images/LATEST_2.png" class="latest-img"/>
+      <div class="latest-meta"><span class="tag esports">ESPORTS</span></div>
+      <h3 class="latest-title">Champions Paris</h3>
+      <p class="latest-desc">Watch and earn rewards.</p>
+    </article>
+
+    <article class="latest-card">
+      <img src="/images/LATEST_3.png" class="latest-img"/>
+      <div class="latest-meta"><span class="tag">NEWS</span></div>
+      <h3 class="latest-title">New Agent Tease</h3>
+      <p class="latest-desc">A glimpse of upcoming agent.</p>
+    </article>
+
+  </div>
+
+  <div class="latest-divider"></div>
+</section>
+
+<!-- CHAMPIONS -->
+<section class="champs-banner">
+  <div class="champs-wrap">
+    <img src="/images/VALORANT_WATCHNOW_BACKGROUND.avif" class="champs-img"/>
+    <div class="champs-overlay">
+      <h2 class="champs-title">VALORANT CHAMPIONS</h2>
+      <p class="champs-sub">Watch biggest plays</p>
+      <a href="#" class="champs-btn">WATCH NOW</a>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section class="agents">
+  <div class="agents-layer">
+    <div class="agents-content">
+
+      <div class="agents-left">
+        <img src="/images/PLAYER INSIDE THE AGENTS Background Removed.png" class="agents-art"/>
+      </div>
+
+      <div class="agents-right">
+        <h2 class="section-kicker">YOUR AGENTS</h2>
+        <p class="agents-sub">CREATIVITY IS YOUR WEAPON.</p>
+        <p class="agents-desc">Choose agents with unique abilities.</p>
+        <a href="/agents" class="btn-dark">VIEW ALL AGENTS</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MAPS -->
+<section class="maps">
+  <div class="maps-layer">
+    <div class="maps-content">
+
+      <div class="maps-left">
+        <h2 class="section-kicker dark">YOUR MAPS</h2>
+        <p class="maps-sub">FIGHT AROUND THE WORLD</p>
+        <p class="maps-desc">Maps crafted for strategy.</p>
+        <a href="/maps" class="btn-accent">VIEW ALL MAPS</a>
+      </div>
+
+      <div class="maps-right">
+        <img src="/images/BACKGROUND OVERLAY IMAGE.avif" class="maps-art"/>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="riot-footer">
+  <div class="footer-social">
+    <a href="https://twitter.com/valorant" target="_blank" class="footer-icon"><img src="/images/X_LOGO.png" alt="X"></a>
+    <a href="https://www.youtube.com/@valorant" target="_blank" class="footer-icon"><img src="/images/YT_LOGO.png" alt="YouTube"></a>
+    <a href="https://instagram.com/valorant" target="_blank" class="footer-icon"><img src="/images/INSTAGRAM_LOGO.png" alt="Instagram"></a>
+    <a href="https://www.tiktok.com/@valorant" target="_blank" class="footer-icon"><img src="/images/TIK TOK_LOGO.png" alt="TikTok"></a>
+    <a href="https://www.facebook.com/playvalorant/" target="_blank" class="footer-icon"><img src="/images/FACEBOOK_LOGO.png" alt="Facebook"></a>
+    <a href="https://discord.gg/valorant" target="_blank" class="footer-icon"><img src="/images/DISCORD_LOGO.png" alt="Discord"></a>
+  </div>
+
+  <img src="/images/RIOT_GAMES_LOGO.png" alt="Riot Games Footer Logo" class="footer-riot-logo"/>
+
+  <div class="footer-copyright">
+    © 2020-2026 Riot Games, Inc. RIOT GAMES, VALORANT and any associated logos are trademarks of Riot Games, Inc.
+  </div>
+
+  <div class="footer-links">
+    <a href="https://www.riotgames.com/en/privacy-notice" class="footer-link">PRIVACY NOTICE</a>
+    <a href="https://www.riotgames.com/en/terms-of-service" class="footer-link">TERMS OF SERVICE</a>
+    <a href="#" class="footer-link">COOKIE PREFERENCES</a>
+  </div>
+
+  <div class="footer-esrb">
+    <img src="/images/U:A_LOGO.png" alt="ESRB Rating" class="footer-esrb-img"/>
+    <div class="footer-esrb-text">
+      Blood<br>
+      Language<br>
+      Violence<br>
+      Users Interact<br>
+      In-Game Purchases
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

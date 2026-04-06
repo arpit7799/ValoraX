@@ -1,0 +1,35 @@
+<header class="navbar">
+  <div class="logo-section">
+    <a href="/">
+      <img src="/images/RIOT_LOGO.png" class="riot-logo"/>
+    </a>
+    <a href="/">
+      <img src="/images/VALORANT_ICON.png" class="valo-icon"/>
+    </a>
+  </div>
+
+  <nav class="nav-menu">
+    <ul>
+      <li class="dropdown">
+        <a href="#" class="dropbtn">GAME INFO</a>
+        <ul class="dropdown-content">
+          <li><a href="/agents">Agents</a></li>
+          <li><a href="/maps">Maps</a></li>
+          <li><a href="/random-agents" target="_blank">Random Agent Generator</a></li>
+          <li><a href="/guns-random-skin" target="_blank">Random Gun Skin Generator</a></li>
+          <li><a href="/maps-random" target="_blank">Random Map Generator</a></li>
+        </ul>
+      </li>
+
+      <li><a href="/store">STORE</a></li>
+
+      <% if (!currentUser) { %>
+        <li><a href="/login">LOGIN</a></li>
+        <li><a href="/register">REGISTER</a></li>
+      <% } else { %>
+        <li><a href="/dashboard"><%= currentUser.username %></a></li>
+        <li><a href="/logout">LOGOUT</a></li>
+      <% } %>
+    </ul>
+  </nav>
+</header>

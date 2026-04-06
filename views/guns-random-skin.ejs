@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valorant Gun Skin Shuffle</title>
+  <link rel="stylesheet" href="/css/gun-skins.css"><!-- serve from public/css -->
+</head>
+<body>
+  <nav>
+    <div class="nav-left">
+      <h2>Valorant Fan Hub</h2>
+    </div>
+    <div class="nav-right">
+      <a href="/" >HOME Page</a>
+      <a href="/agents" target="_blank">Agents</a>
+      <a href="/maps" target="_blank">Maps</a>
+      <a href="/gun-skins" class="active">Gun Skins</a>
+    </div>
+  </nav>
+
+  <h1>▄︻デ══━一 Valorant Gun Skin Shuffle ▄︻デ══━一</h1>
+
+  <div id="gun-card" class="gun-card">
+    <img id="gun-image" src="" alt="Gun Image">
+    <h2 id="gun-name"></h2>
+    <p id="gun-type"></p>
+    <p id="gun-price"></p>
+  </div>
+
+  <button id="shuffle-btn">▄︻デ══━一 𖦏 Shuffle Skin ▄︻デ══━一 𖦏</button>
+
+  <footer>Made with ❤️ by Arpit, Arnav, Aashish | Valorant Gun Skins</footer>
+
+  <script>
+    let gunsData = [];
+
+    // Fetch JSON data
+    fetch("/data/guns.json") // serve from public/data
+      .then(response => response.json())
+      .then(data => {
+        gunsData = data.guns;
+        showRandomGun(); // Display one on load
+      });
+
+    function showRandomGun() {
+      const randomIndex = Math.floor(Math.random() * gunsData.length);
+      const gun = gunsData[randomIndex];
+
+      document.getElementById("gun-image").src = gun.image;
+      document.getElementById("gun-name").textContent = "Gun: " + gun.name;
+      document.getElementById("gun-type").textContent = "Type: " + gun.type;
+      document.getElementById("gun-price").textContent = "Price: " + gun.price + " credits";
+    }
+
+    document.getElementById("shuffle-btn").addEventListener("click", showRandomGun);
+  </script>
+</body>
+</html>

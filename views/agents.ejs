@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agents • VALORANT</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="/css/agents.css?v=1.1"/>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="logo-section">
+    <a href="/">
+      <img src="/images/RIOT_LOGO.png" alt="Riot Games Logo" class="riot-logo"/>
+    </a>
+    <a href="/">
+      <img src="/images/VALORANT_ICON.png" alt="Valorant Icon" class="valo-icon"/>
+    </a>
+  </div>
+
+  <nav class="nav-menu">
+    <ul>
+      <li class="dropdown">
+        <a href="#" class="dropbtn">GAME INFO</a>
+        <ul class="dropdown-content">
+          <li><a href="/agents">Agents</a></li>
+          <li><a href="/maps">Maps</a></li>
+          <li><a href="#">Arsenal</a></li>
+          <li><a href="#">Premier</a></li>
+
+          <li><a href="/random-agents" target="_blank">Random Agent Generator</a></li>
+          <li><a href="/guns-random-skin" target="_blank">Random Gun Skin Generator</a></li>
+          <li><a href="/maps-random" target="_blank">Random Map Generator</a></li>
+          <li><a href="/agents-oop" target="_blank">VIEW AGENTS (OOP DEMO)</a></li>
+        </ul>
+      </li>
+
+      <li><a href="https://playvalorant.com/en-us/media">MEDIA</a></li>
+      <li><a href="https://playvalorant.com/en-us/news/">NEWS</a></li>
+
+      <li class="dropdown">
+        <a href="https://support-valorant.riotgames.com/hc/en-us/" class="dropbtn">SUPPORT</a>
+        <ul class="dropdown-content">
+          <li><a href="https://playvalorant.com/en-us/specs/">Specs</a></li>
+          <li><a href="https://support-valorant.riotgames.com/hc/en-us/">Support</a></li>
+          <li><a href="https://playvalorant.com/en-us/news/announcements/valorant-community-code/">Community</a></li>
+          <li><a href="#">Code</a></li>
+        </ul>
+      </li>
+
+      <li><a href="https://valorantesports.com/">ESPORTS</a></li>
+      <li><a href="https://ftw.riotgames.com/valorant/champions-of-champions">CHAMPIONS OF CHAMPIONS</a></li>
+      <li><a href="/store">STORE</a></li>
+    </ul>
+  </nav>
+
+  <div class="menu-section">
+    <a href="/" class="playnow-link">
+      <img src="/images/home_ICON.png" alt="Play Now" class="nav-icon search-icon"/>
+    </a>
+    <img src="/images/BROWSER_LOGO.png" alt="Browse" class="nav-icon browser-icon big"/>
+    <img src="/images/HAMBURGER_ICON.png" alt="Menu" class="nav-icon hamburger-icon big"/>
+  </div>
+</header>
+
+<div class="header-strip"></div>
+
+<!-- AGENTS GRID -->
+<main class="agents-page">
+  <div class="agents-wrap">
+    <h1 class="agents-title">AGENTS</h1>
+
+    <section class="agents-grid">
+      <% agents.forEach(agent => { %>
+        <article class="agent-card">
+          <a href="/agents/<%= agent.id %>">
+            <div class="agent-art">
+              <img 
+                src="/images/<%= agent.name.toUpperCase().replace('/', '') %>.avif" 
+                alt="<%= agent.name %>">
+            </div>
+            <div class="agent-label">
+              <%= agent.name.toUpperCase() %>
+            </div>
+          </a>
+        </article>
+      <% }) %>
+    </section>
+
+  </div>
+</main>
+
+<!-- DOWNLOAD CTA -->
+<section class="download-cta">
+  <div class="download-cta-inner">
+    <h2 class="download-cta-title">DOWNLOAD RIOT MOBILE COMPANION APP</h2>
+    <a class="download-cta-button" href="/download" target="_blank" rel="noopener">
+      <span class="btn-label">GO TO DOWNLOAD PAGE</span>
+      <span class="btn-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="riot-footer">
+  <div class="footer-social">
+    <a href="https://twitter.com/valorant" target="_blank" class="footer-icon"><img src="/images/X_LOGO.png" alt="X"></a>
+    <a href="https://www.youtube.com/@valorant" target="_blank" class="footer-icon"><img src="/images/YT_LOGO.png" alt="YouTube"></a>
+    <a href="https://instagram.com/valorant" target="_blank" class="footer-icon"><img src="/images/INSTAGRAM_LOGO.png" alt="Instagram"></a>
+    <a href="https://www.tiktok.com/@valorant" target="_blank" class="footer-icon"><img src="/images/TIK TOK_LOGO.png" alt="TikTok"></a>
+    <a href="https://www.facebook.com/playvalorant/" target="_blank" class="footer-icon"><img src="/images/FACEBOOK_LOGO.png" alt="Facebook"></a>
+    <a href="https://discord.gg/valorant" target="_blank" class="footer-icon"><img src="/images/DISCORD_LOGO.png" alt="Discord"></a>
+  </div>
+
+  <img src="/images/RIOT_GAMES_LOGO.png" alt="Riot Games Footer Logo" class="footer-riot-logo"/>
+
+  <div class="footer-copyright">
+    © 2020-2026 Riot Games, Inc. RIOT GAMES, VALORANT and any associated logos are trademarks of Riot Games, Inc.
+  </div>
+
+  <div class="footer-links">
+    <a href="https://www.riotgames.com/en/privacy-notice" class="footer-link">PRIVACY NOTICE</a>
+    <a href="https://www.riotgames.com/en/terms-of-service" class="footer-link">TERMS OF SERVICE</a>
+    <a href="#" class="footer-link">COOKIE PREFERENCES</a>
+  </div>
+
+  <div class="footer-esrb">
+    <img src="/images/U:A_LOGO.png" alt="ESRB Rating" class="footer-esrb-img"/>
+    <div class="footer-esrb-text">
+      Blood<br>
+      Language<br>
+      Violence<br>
+      Users Interact<br>
+      In-Game Purchases
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

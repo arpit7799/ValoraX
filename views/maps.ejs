@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Maps • VALORANT</title>
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+
+  <!-- SAME CSS -->
+  <link rel="stylesheet" href="/css/index.css"/>
+
+  <style>
+    /* ===== FINAL LAYOUT FIX ===== */
+
+    body {
+      overflow-y: auto;
+    }
+
+    /* remove hero restriction */
+    .hero-section {
+      height: auto !important;
+      min-height: auto !important;
+      overflow: visible !important;
+      position: relative !important;
+    }
+
+    /* FIX BACKGROUND OVERLAY ISSUE */
+    .hero-background {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* keep content above */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 120px 0;
+    }
+
+    /* FOOTER FIX */
+    .riot-footer {
+      position: relative;
+      z-index: 2;
+      margin-top: 80px;
+    }
+
+    /* MAP UI */
+    .maps-container {
+      background: rgba(31, 39, 49, 0.65);
+      backdrop-filter: blur(14px);
+      padding: 40px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 1100px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    }
+
+    .map-block {
+      margin-bottom: 60px;
+    }
+
+    .map-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 38px;
+      color: #ff4655;
+      margin-bottom: 10px;
+    }
+
+    .map-description {
+      color: #ccc;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .map-img {
+      width: 100%;
+      border-radius: 12px;
+      max-height: 400px;
+      object-fit: cover;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* HOME ICON FIX */
+    .menu-section .search-icon {
+      width: 28px !important;
+      height: 28px !important;
+      object-fit: contain;
+    }
+
+    .menu-section .search-icon:hover {
+      transform: scale(1.1);
+      transition: 0.2s ease;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="logo-section">
+    <a href="/"><img src="/images/RIOT_LOGO.png" class="riot-logo"/></a>
+    <a href="/"><img src="/images/VALORANT_ICON.png" class="valo-icon"/></a>
+  </div>
+
+  <nav class="nav-menu">
+    <ul>
+      <li><a href="/">HOME</a></li>
+      <li><a href="/agents">AGENTS</a></li>
+      <li><a href="/maps" style="color:#ff4655;">MAPS</a></li>
+      <li><a href="/store">STORE</a></li>
+
+      <% if (!currentUser) { %>
+        <li><a href="/login">LOGIN</a></li>
+        <li><a href="/register">REGISTER</a></li>
+      <% } else { %>
+        <li><a href="/dashboard">DASHBOARD</a></li>
+        <li><a href="/logout">LOGOUT</a></li>
+      <% } %>
+    </ul>
+  </nav>
+
+  <div class="menu-section">
+    <a href="/">
+      <img src="/images/home_ICON.png" class="nav-icon search-icon"/>
+    </a>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="hero-section">
+
+  <!-- VIDEO BACKGROUND -->
+  <div class="hero-background">
+    <video class="hero-video" src="/videos/register_page_video.mp4" autoplay muted loop playsinline></video>
+    <div class="overlay"></div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="hero-content">
+    <div class="maps-container">
+
+      <% maps.forEach(map => { %>
+        <div class="map-block">
+
+          <div class="map-title"><%= map.name %></div>
+
+          <div class="map-description">
+            <%= map.description %>
+          </div>
+
+          <img src="<%= map.image %>" class="map-img"/>
+
+        </div>
+      <% }) %>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="riot-footer">
+  <div class="footer-social">
+    <a href="https://twitter.com/valorant" target="_blank"><img src="/images/X_LOGO.png"></a>
+    <a href="https://www.youtube.com/@valorant" target="_blank"><img src="/images/YT_LOGO.png"></a>
+    <a href="https://instagram.com/valorant" target="_blank"><img src="/images/INSTAGRAM_LOGO.png"></a>
+    <a href="https://www.tiktok.com/@valorant" target="_blank"><img src="/images/TIK TOK_LOGO.png"></a>
+    <a href="https://www.facebook.com/playvalorant/" target="_blank"><img src="/images/FACEBOOK_LOGO.png"></a>
+    <a href="https://discord.gg/valorant" target="_blank"><img src="/images/DISCORD_LOGO.png"></a>
+  </div>
+
+  <img src="/images/RIOT_GAMES_LOGO.png" class="footer-riot-logo"/>
+
+  <div class="footer-links">
+    <a href="#">PRIVACY NOTICE</a>
+    <a href="#">TERMS OF SERVICE</a>
+    <a href="#">COOKIE PREFERENCES</a>
+  </div>
+
+  <div class="footer-esrb">
+    <img src="/images/U:A_LOGO.png"/>
+    <div>
+      Blood<br>Language<br>Violence<br>Users Interact<br>In-Game Purchases
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
