@@ -18,7 +18,7 @@ Built using **Node.js, Express, MySQL, and EJS**, the project focuses on dynamic
 ![Store](screenshots/store_page.png)
 
 ### 🗺 Maps Page
-![Maps](screenshots/map_page.png)
+![Maps](screenshots/maps_page.png)
 
 ### 📊 Dashboard
 ![Dashboard](screenshots/dashboard_page.png)
