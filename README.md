@@ -1,4 +1,4 @@
-# 🎮 Valora
+# 🎮 ValoraX
 
 **Valora** is a full-stack Valorant-inspired web application that simulates a gaming ecosystem with authentication, store management, map exploration, and admin controls.
 
